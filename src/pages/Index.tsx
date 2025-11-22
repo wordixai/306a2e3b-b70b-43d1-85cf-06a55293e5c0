@@ -17,6 +17,7 @@ import VocabularyGame from '@/components/VocabularyGame';
 import GrammarGame from '@/components/GrammarGame';
 import PronunciationGame from '@/components/PronunciationGame';
 import ListeningGame from '@/components/ListeningGame';
+import Hero from '@/components/Hero';
 import { BookOpen, Brain, Mic, Headphones, Trophy, Flame, Star } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'sonner';
@@ -24,6 +25,7 @@ import { toast } from 'sonner';
 const Index = () => {
   const [selectedLanguage, setSelectedLanguage] = useState<Language>('spanish');
   const [gameMode, setGameMode] = useState<GameMode | null>(null);
+  const [showHero, setShowHero] = useState(true);
   const [stats, setStats] = useState<GameStats>({
     correct: 0,
     incorrect: 0,
@@ -89,6 +91,18 @@ const Index = () => {
     { value: 'italian', label: 'Italian', flag: '🇮🇹' },
     { value: 'japanese', label: 'Japanese', flag: '🇯🇵' },
   ];
+
+  const handleGetStarted = () => {
+    setShowHero(false);
+  };
+
+  if (showHero) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Hero onGetStarted={handleGetStarted} />
+      </div>
+    );
+  }
 
   if (!gameMode) {
     return (
